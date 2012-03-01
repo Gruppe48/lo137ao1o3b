@@ -11,8 +11,8 @@ package oblig1;
 class Company extends AbstractOwner {
   protected int companyID; //Company number
   
-  public Company (String name, String address, VehicleList vehicles, int companyID ) {
-    super (name,address,vehicles);
+  public Company (String name, String address, int companyID ) {
+    super (name,address);
     companyID = companyID;
   }
   

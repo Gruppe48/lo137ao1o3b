@@ -12,10 +12,10 @@ public abstract class AbstractOwner implements Serializable {
   protected AbstractOwner next;
   protected AbstractOwner previous;
   
-  public AbstractOwner(String name, String address, VehicleList vehicles) {
+  public AbstractOwner(String name, String address) {
     this.name = name;
     this.address = address;
-    this.vehicles = vehicles;
+    this.vehicles = new VehicleList();
   }
 
   public String getAddress() {

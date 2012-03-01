@@ -12,8 +12,8 @@ package oblig1;
 class Person extends AbstractOwner {
   protected int ssn; //Social Security number 
   
-  public Person (String name, String address, VehicleList vehicles, int ssn) {
-    super (name,address,vehicles);
+  public Person (String name, String address, int ssn) {
+    super (name,address);
     this.ssn = ssn;
   }
   
