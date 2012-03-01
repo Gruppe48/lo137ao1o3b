@@ -378,8 +378,11 @@ public class Manager extends JFrame {
       String regNr = textVehicleRegNumber.getText();
       
       if (!regNr.equals("")) {
-        registry.changeOwner(regNr,ownerID);
-        display.setText("Kjøretøyet har blitt flyttet!");
+        if(registry.changeOwner(regNr,ownerID)) {
+          display.setText("Kjøretøyet har blitt flyttet!");
+        }
+        else
+          display.setText("Kunne ikke flytte kjøretøyet.");
       }
       else {
         display.setText("Noen felter er tomme!");

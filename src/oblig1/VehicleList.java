@@ -14,8 +14,10 @@
 
 package oblig1;
 
+import java.io.Serializable;
 
-public class VehicleList {
+
+public class VehicleList implements Serializable {
   protected Vehicle first;
   
   public static final int SUCCESS       = 1;  // Returns 1 on success

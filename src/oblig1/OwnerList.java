@@ -211,6 +211,10 @@ public class OwnerList implements Serializable {
       // The vehicle has a owner.
       AbstractOwner newOwner = find(ownerID);
       if (newOwner != null) {
+        // If user tries to move your own car to yourself
+        if(newOwner.getOwnerID() == owner.getOwnerID()) {
+          return false;
+        }
         // The new owner also exists
         if (owner.vehicles.exists(regNumber)) {
           newOwner.vehicles.add(owner.vehicles.get(regNumber));
