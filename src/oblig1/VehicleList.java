@@ -83,6 +83,16 @@ public class VehicleList {
     }
     return current;
   }
+  public int length() {
+    int counter = 0;
+    Vehicle current = first;
+    
+    while (current != null) {
+      counter++;
+      current = current.next;
+    }
+    return counter;
+  }
   public String list(){
     String result = "Kjøretøy:\n";
     Vehicle current = first;
