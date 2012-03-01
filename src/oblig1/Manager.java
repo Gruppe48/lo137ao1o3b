@@ -265,16 +265,26 @@ public class Manager extends JFrame {
   }
   
   public void deleteVehicle() {
-    String regNr = textVehicleRegNumber.getText();
-    
-    if (!regNr.equals("")) {
-      if(registry.removeVehicle(regNr)) {
-        display.setText("Bilen: " + regNr + " er nå slettet\n");
-      }
-      else {
-        display.setText("Bilen: " + regNr + " kan ikke slettes."
-                + "Enten finnes den ikke, eller så er det noen som eier den");
-      }
+  String regNr = textVehicleRegNumber.getText();
+  int status;
+
+  if (!regNr.equals("")) {
+    status = registry.removeVehicle(regNr);
+
+    switch(status) {
+      case OwnerList.SUCCESS: display.setText("Bilen: " + regNr + " er nå slettet\n");
+        break;
+      case OwnerList.EMPTY_LIST: display.setText("Listen er tom, og det er derfor ingen kjøretøy å slette\n");
+        break;
+      case OwnerList.UNKNOWN: display.setText("Ukjent registreringsnummer: " + regNr + "\n");
+        break;
+    }
+
+
+    }
+    else {
+      display.setText("Bilen: " + regNr + " kan ikke slettes."
+              + "Enten finnes den ikke, eller så er det noen som eier den");
     }
   }
   
@@ -286,7 +296,7 @@ public class Manager extends JFrame {
       String address = textOwnerAddress.getText();
       
       if (!ownerName.equals("") && !address.equals("")) {
-        Person owner = new Person(ownerName, address, null, ownerID);
+        Person owner = new Person(ownerName, address, ownerID);
         if (registry.addOwner(owner)) {
           display.setText("Eier registert!");
         }
@@ -310,7 +320,7 @@ public class Manager extends JFrame {
       String address = textOwnerAddress.getText();
       
       if (!companyName.equals("") && !address.equals("")) {
-        Company owner = new Company (companyName, address, null, ownerID);
+        Company owner = new Company (companyName, address, ownerID);
       
         if (registry.addOwner(owner)) {
           display.setText("Eier registert!");
