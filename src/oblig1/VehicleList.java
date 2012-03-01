@@ -1,13 +1,20 @@
-/*
- */
-package oblig1;
-
 /**
  *
  * @author Kristoffer Berdal <web@flexd.net>
  * @studnr 180212
- * @date Mar 1, 2012
+
+ * @author Even Augdal <even.augdal@gmail.com>
+ * @studnr 181091
+ * 
+ * @author Tommy Nyrud <s180487@stud.hioa.no>
+ * @studnr 180487
+ * 
+ * @date Feb 20, 2012
  */
+
+package oblig1;
+
+
 public class VehicleList {
   protected Vehicle first;
   
