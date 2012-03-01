@@ -1,0 +1,5 @@
+.DS_Store
+nbproject/private/
+/build/
+/src/lists
+ownerlist.dat
