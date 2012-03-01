@@ -99,8 +99,8 @@ public class OwnerList implements Serializable {
     
   }
   
-  public int removeVehicle(int ownerID, String regNr) {
-    AbstractOwner owner = find(ownerID);
+  public int removeVehicle(String regNr) {
+    AbstractOwner owner = getOwner(regNr);
     if (owner != null) {
       if (owner.vehicles.exists(regNr)) {
         return owner.vehicles.remove(regNr);     
