@@ -9,7 +9,6 @@ public class OwnerList implements Serializable {
   
   public static final int SUCCESS       = 1;  // Returns 1 on success
   public static final int UNKNOWN       = 0;  // Returns 0 if ownerID doesn't exists
-  public static final int HAS_VEHICLE  = -1; // Returns -1 if owner do have a vehicle
   public static final int EMPTY_LIST    = -2; // Returns -2 if the list of owners is empty   
   
   private AbstractOwner first;
@@ -49,8 +48,8 @@ public class OwnerList implements Serializable {
       if (current.next == null) {
         return false;
       }
-      if (current.vehicle != null) {
-        if (current.vehicle.getRegNr().equals(regNr)) {
+      if (current.vehicles != null) {
+        if (current.vehicles.exists(regNr)) {
           return true;
         }
       }
@@ -73,14 +72,7 @@ public class OwnerList implements Serializable {
       AbstractOwner owner = find(ownerID);
       if (owner != null && vehicle != null) {
         // Owner by that name exists and we have a non-null vehicle.
-        if (owner.vehicle == null) {
-          owner.vehicle = vehicle;
-          return true;
-        }
-        else {
-          // already owns a vehicle.
-          return false;
-        }
+        return owner.vehicles.add(vehicle);
       }
     }
     return false;
@@ -105,21 +97,13 @@ public class OwnerList implements Serializable {
     
   }
   
-  public boolean removeVehicle(String regNr) {
-    if (first == null) {
-      return false;
-    }
-    
-    AbstractOwner current = first;
-    while(current != null && current.vehicle != null && !current.vehicle.getRegNr().equals(regNr)) {
-      if (current.next == null) {
-        return false;
+  public int removeVehicle(AbstractOwner owner, String regNr) {
+    if (owner != null) {
+      if (owner.vehicles != null) {
+        return owner.vehicles.remove(regNr);     
       }
-      current = current.next;
     }
-    System.out.println("Current owner:" + current.getName());
-    current.setVehicle(null);
-    return true;
+    return UNKNOWN;
   }
   
   public int removeOwner(int ownerID) {
@@ -127,14 +111,14 @@ public class OwnerList implements Serializable {
     if (first == null) {
       return EMPTY_LIST;
     }
-    
+    //TODO: FIX MEG
     if(ownerID == first.getOwnerID()) {
-      if(first.vehicle == null ) {
+      if(first.vehicles == null ) {
         first = first.next;
         return SUCCESS;
       }
       else {
-        return HAS_VEHICLE;
+        return HAS_VEHICLES;
       }
     }
     else {
@@ -149,7 +133,7 @@ public class OwnerList implements Serializable {
             current.next = null;
             return SUCCESS;
           }
-          return HAS_VEHICLE;
+          return HAS_VEHICLES;
         }
         current.next = current.next.next;
       }
@@ -165,7 +149,7 @@ public class OwnerList implements Serializable {
     
     AbstractOwner current = first;
     while(current != null) {
-      if (current.vehicle != null && current.vehicle.getRegNr().equals(regNr)) {
+      if (current.vehicles != null && current.vehicles.exists(regNr)) {
         return current.toString();
       }
       current = current.next;
@@ -180,7 +164,7 @@ public class OwnerList implements Serializable {
     
     AbstractOwner current = first;
     while(current != null) {
-      if (current.vehicle != null && current.vehicle.getRegNr().equals(regNr)) {
+      if (current.vehicles != null && current.vehicles.get(regNr)) {
         return current;
       }
       current = current.next;

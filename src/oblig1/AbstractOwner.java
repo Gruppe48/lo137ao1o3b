@@ -6,16 +6,16 @@ import java.io.Serializable;
 public abstract class AbstractOwner implements Serializable {
   protected String name;
   protected String address;
-  protected Vehicle vehicle;
+  protected VehicleList vehicles;
   
   // Iterators
   protected AbstractOwner next;
   protected AbstractOwner previous;
   
-  public AbstractOwner(String name, String address, Vehicle vehicle) {
+  public AbstractOwner(String name, String address, VehicleList vehicles) {
     this.name = name;
     this.address = address;
-    this.vehicle = vehicle;
+    this.vehicles = vehicles;
   }
 
   public String getAddress() {
@@ -26,12 +26,12 @@ public abstract class AbstractOwner implements Serializable {
     this.address = address;
   }
 
-  public Vehicle getVehicle() {
-    return vehicle;
+  public VehicleList getVehicles() {
+    return vehicles;
   }
 
-  public void setVehicle(Vehicle car) {
-    this.vehicle = car;
+  public void setVehicles(VehicleList vehicles) {
+    this.vehicles = vehicles;
   }
 
   public String getName() {

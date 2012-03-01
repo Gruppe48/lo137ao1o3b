@@ -9,6 +9,8 @@ public class Vehicle implements Serializable {
   private String model; // Model, obviously.
   private int regYear; // First time registered.
   
+  protected Vehicle next;
+  
   public Vehicle (String regNumber, String make, String model, int regYear) {
     this.regNbr = regNumber;
     this.make = make;

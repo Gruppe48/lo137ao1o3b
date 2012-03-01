@@ -12,8 +12,8 @@ package oblig1;
 class Person extends AbstractOwner {
   protected int ssn; //Social Security number 
   
-  public Person (String name, String address, Vehicle car, int ssn) {
-    super (name,address,car);
+  public Person (String name, String address, VehicleList vehicles, int ssn) {
+    super (name,address,vehicles);
     this.ssn = ssn;
   }
   
@@ -25,8 +25,8 @@ class Person extends AbstractOwner {
   @Override
   public String toString() {
     String res = super.toString() + "Personnr: " + ssn + "\n";
-    if (vehicle != null) {
-      res += "Bil:\n" + vehicle.toString();
+    if (vehicles != null) {
+      res += "Bil:\n" + vehicles.list();
     }
     return res;  
   }
